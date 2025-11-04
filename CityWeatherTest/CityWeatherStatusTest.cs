@@ -10,7 +10,7 @@ using Moq;
 
 namespace CityWeatherTest;
 
-public class UnitTest1
+public class CityWeatherStatusTest
 {
       [Fact]
     public async Task GetCityWeather_Returns_Combined_Weather_And_Pollution_Data()
