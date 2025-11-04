@@ -1,0 +1,54 @@
+### JetBrains Rider ###
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Rider settings
+*.DotSettings.user
+
+### Build folders ###
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+### Visual Studio cache ###
+.vs/
+.vscode/
+
+### User files ###
+*.user
+*.suo
+*.userosscache
+*.rsuser
+*.sln.docstates
+
+### Logs and temp ###
+*.log
+*.tlog
+*.tmp
+*.temp
+*.cache
+*.dbmdl
+
+### NuGet ###
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+!packages/build/
+
+### Entity Framework ###
+Migrations/
+
+### SQLite database ###
+*.db
+*.db-shm
+*.db-wal

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityWeathers", "CityWeathers\CityWeathers.csproj", "{BD1C1741-3AF9-447F-855A-68146678A8E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityWeatherTest", "CityWeatherTest\CityWeatherTest.csproj", "{599E2AFC-F6EC-43D7-9308-5E310473DB55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD1C1741-3AF9-447F-855A-68146678A8E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD1C1741-3AF9-447F-855A-68146678A8E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD1C1741-3AF9-447F-855A-68146678A8E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD1C1741-3AF9-447F-855A-68146678A8E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599E2AFC-F6EC-43D7-9308-5E310473DB55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599E2AFC-F6EC-43D7-9308-5E310473DB55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599E2AFC-F6EC-43D7-9308-5E310473DB55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599E2AFC-F6EC-43D7-9308-5E310473DB55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
