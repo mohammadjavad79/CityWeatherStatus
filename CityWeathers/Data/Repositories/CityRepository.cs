@@ -6,7 +6,7 @@ namespace CityWeathers.Data.Repositories;
 
 public class CityRepository : ICityRepository
 {
-    private WeatherDbContext _context;
+    private readonly WeatherDbContext _context;
 
     public CityRepository(WeatherDbContext weatherDbContext)
     {

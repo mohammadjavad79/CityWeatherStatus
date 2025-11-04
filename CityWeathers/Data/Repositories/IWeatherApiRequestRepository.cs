@@ -4,5 +4,5 @@ namespace CityWeathers.Data.Repositories;
 
 public interface IWeatherApiRequestRepository
 {
-    public Task<WeatherApiRequest> Create(WeatherApiRequest weatherApiRequest);
+    public Task<WeatherApiRequest> StoreAsync(WeatherApiRequest weatherApiRequest);
 }

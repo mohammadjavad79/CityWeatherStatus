@@ -9,19 +9,22 @@ namespace CityWeathers.Core.Services.Application;
 
 public class WeatherAppService : IWeatherAppService
 {
-    private IWeatherService _weatherService;
-    private ICityRepository _cityRepository;
-    private ILogger<WeatherAppService> _logger;
+    private readonly IWeatherService _weatherService;
+    private readonly ICityRepository _cityRepository;
+    private readonly ILogger<WeatherAppService> _logger;
+    private readonly ICityDataRepository _cityDataRepository;
 
     public WeatherAppService(
         IWeatherService weatherService,
         ICityRepository cityRepository,
-        ILogger<WeatherAppService> logger
+        ILogger<WeatherAppService> logger,
+        ICityDataRepository cityDataRepository
         )
     {
         _weatherService = weatherService;
         _cityRepository = cityRepository;
         _logger = logger;
+        _cityDataRepository = cityDataRepository;
     }
     
     public async Task<GetCityWeatherStatusResponseDto> GetCityWeather(string cityName)
@@ -30,13 +33,30 @@ public class WeatherAppService : IWeatherAppService
         
         var (cityWeather, weatherFailed) = await TryGetCityWeatherAsync(city);
         var (cityPollutant, pollutionFailed) = await TryGetCityPollutantAsync(city);
-
+        
+        await StoreCityDataAsync(cityWeather, cityPollutant, city);
+        
         if (weatherFailed && pollutionFailed)
         {
             throw new ThirdPartyServiceNotAvailable("Third party service not available");
         }
         
         return MapToResponse(cityWeather, cityPollutant);
+    }
+
+    private async Task StoreCityDataAsync(CityWeatherDto? cityWeatherDto, CityPollutantDto? cityPollutantDto, City city)
+    {
+        var cityData = new CityData()
+        {
+            Temperature = cityWeatherDto?.TemperatureCelsius,
+            Humidity = cityWeatherDto?.HumidityPercent,
+            WindSpeed = cityWeatherDto?.WindSpeedMetersPerSecond,
+            AirQuality = cityPollutantDto?.AirQualityIndex,
+            Pollutants = cityPollutantDto?.MajorPollutantsJson.ToString() ?? string.Empty,
+            CityId = city.Id
+        };
+
+        await _cityDataRepository.StoreAsync(cityData);
     }
     
     private async Task<City> GetCityOrThrowAsync(string cityName)

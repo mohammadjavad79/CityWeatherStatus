@@ -42,6 +42,7 @@ builder.Services.AddHttpClient<IWeatherService, OpenWeatherService>();
 builder.Services.AddScoped<IWeatherAppService, WeatherAppService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IWeatherApiRequestRepository, WeatherApiRequestRepository>();
+builder.Services.AddScoped<ICityDataRepository, CityDataRepository>();
 builder.Services.AddDbContext<WeatherDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration["Databases:Sqlite:ConnectionString"]);

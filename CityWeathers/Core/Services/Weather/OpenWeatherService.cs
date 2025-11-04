@@ -44,7 +44,7 @@ public class OpenWeatherService : IWeatherService
             {
                 _logger.LogError(response.ReasonPhrase + ", Open Weather Weather Service Response is " + responseBody);
 
-                await _weatherApiRequestRepository.Create(
+                await _weatherApiRequestRepository.StoreAsync(
                     PrepareForLog(
                         cityId, 
                         requestLog, 
@@ -55,7 +55,7 @@ public class OpenWeatherService : IWeatherService
                 throw new ThirdPartyServiceNotAvailable("Third part service not available");
             }
             
-            await _weatherApiRequestRepository.Create(
+            await _weatherApiRequestRepository.StoreAsync(
                 PrepareForLog(
                     cityId, 
                     requestLog, 
@@ -88,7 +88,7 @@ public class OpenWeatherService : IWeatherService
         {
             _logger.LogError(e, e.Message);
             
-            await _weatherApiRequestRepository.Create(PrepareForLog(cityId, requestLog , PrePareExceptionErrorLog(e)));
+            await _weatherApiRequestRepository.StoreAsync(PrepareForLog(cityId, requestLog , PrePareExceptionErrorLog(e)));
             
             throw new ThirdPartyServiceNotAvailable("Third party service not available");
         }
@@ -110,7 +110,7 @@ public class OpenWeatherService : IWeatherService
                 
                 _logger.LogError(response.ReasonPhrase + ", Open Weather Pollutant Service Response is " + responseBody);
 
-                await _weatherApiRequestRepository.Create(
+                await _weatherApiRequestRepository.StoreAsync(
                     PrepareForLog(
                         cityId, 
                         requestLog, 
@@ -121,7 +121,7 @@ public class OpenWeatherService : IWeatherService
                 throw new ThirdPartyServiceNotAvailable("Third part service not available");
             }
             
-            await _weatherApiRequestRepository.Create(
+            await _weatherApiRequestRepository.StoreAsync(
                 PrepareForLog(
                     cityId, 
                     requestLog, 
@@ -151,7 +151,7 @@ public class OpenWeatherService : IWeatherService
         {
             _logger.LogError(e, e.Message);
             
-            await _weatherApiRequestRepository.Create(PrepareForLog(cityId, requestLog , PrePareExceptionErrorLog(e)));
+            await _weatherApiRequestRepository.StoreAsync(PrepareForLog(cityId, requestLog , PrePareExceptionErrorLog(e)));
             
             throw new ThirdPartyServiceNotAvailable("Third party service not available");
         }

@@ -27,6 +27,7 @@ public class UnitTest1
 
         var mockCityRepo = new Mock<ICityRepository>();
         mockCityRepo.Setup(r => r.GetCityByNameAsync("Tehran")).ReturnsAsync(city);
+        var mockCityData = new Mock<ICityDataRepository>();
 
         var mockWeatherService = new Mock<IWeatherService>();
         mockWeatherService.Setup(s => s.GetCityWeatherAsync(city.Id, city.Latitude, city.Longitude))
@@ -47,7 +48,7 @@ public class UnitTest1
             });
 
         var mockLogger = new Mock<ILogger<WeatherAppService>>();
-        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object);
+        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
 
         // Act
         var result = await service.GetCityWeather("Tehran");
@@ -68,10 +69,11 @@ public class UnitTest1
         // Arrange
         var mockCityRepo = new Mock<ICityRepository>();
         mockCityRepo.Setup(r => r.GetCityByNameAsync("UnknownCity")).ReturnsAsync((City?)null);
+        var mockCityData = new Mock<ICityDataRepository>();
 
         var mockWeatherService = new Mock<IWeatherService>();
         var mockLogger = new Mock<ILogger<WeatherAppService>>();
-        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object);
+        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
 
         // Act
         var act = async () => await service.GetCityWeather("UnknownCity");
@@ -96,8 +98,10 @@ public class UnitTest1
         mockWeatherService.Setup(s => s.GetCityPollutantAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
             .ThrowsAsync(new Exception("Pollution service failed"));
 
+        var mockCityData = new Mock<ICityDataRepository>();
+        
         var mockLogger = new Mock<ILogger<WeatherAppService>>();
-        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object);
+        var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
 
         // Act
         var act = async () => await service.GetCityWeather("Tehran");

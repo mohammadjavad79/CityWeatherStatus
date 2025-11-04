@@ -5,24 +5,19 @@ namespace CityWeathers.Data.Repositories;
 
 public class WeatherApiRequestRepository : IWeatherApiRequestRepository
 {
-    private WeatherDbContext _weatherDbContext;
+    private readonly WeatherDbContext _weatherDbContext;
     
     public WeatherApiRequestRepository(WeatherDbContext weatherDbContext)
     {
         _weatherDbContext = weatherDbContext;
     }
     
-    public async Task<WeatherApiRequest> Create(WeatherApiRequest weatherApiRequest)
+    public async Task<WeatherApiRequest> StoreAsync(WeatherApiRequest weatherApiRequest)
     {
         _weatherDbContext.WeatherApiRequests.Add(weatherApiRequest);
         
         await _weatherDbContext.SaveChangesAsync();
         
         return weatherApiRequest;
-    }
-    
-    public async Task<bool> SaveChangesAsync()
-    {
-        return await _weatherDbContext.SaveChangesAsync() > 0; 
     }
 }
