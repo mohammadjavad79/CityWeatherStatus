@@ -69,31 +69,31 @@
         "learningPath": ["self-taught", "professional (current company)"]
         },
         "experience": [
-        "financial systems",
-        "marketplaces",
-        "accounting software",
-        "banking platforms"
+          "financial systems",
+          "marketplaces",
+          "accounting software",
+          "banking platforms"
         ],
         "integrations": [
-        "bank APIs",
-        "payment gateways"
+          "bank APIs",
+          "payment gateways"
         ],
         "motivations": [
-        "curiosity",
-        "continuous learning"
+          "curiosity",
+          "continuous learning"
         ],
         "interests": [
-        "backend development",
-        "database design",
-        "system architecture",
-        "data science",
-        "system design",
-        "modern monitoring tools"
+          "backend development",
+          "database design",
+          "system architecture",
+          "data science",
+          "system design",
+          "modern monitoring tools"
         ],
         "strengths": [
-        "solving complex problems",
-        "performance optimization",
-        "team collaboration"
+          "solving complex problems",
+          "performance optimization",
+          "team collaboration"
         ]
     }
      ```
