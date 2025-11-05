@@ -48,52 +48,52 @@
     
     this test can be good to find out what developers and software engineers will think about task and how they will thought
 
-   6. ### About Me
+6. ### About Me
 
-       A passionate **Software Engineer** with a strong interest in **.NET**, **C#**, and modern backend technologies.  
-       Originally experienced in **PHP**, I transitioned into the **.NET ecosystem**, where I’ve worked both **self-taught** and **professionally** in my current company.
+    A passionate **Software Engineer** with a strong interest in **.NET**, **C#**, and modern backend technologies.  
+    Originally experienced in **PHP**, I transitioned into the **.NET ecosystem**, where I’ve worked both **self-taught** and **professionally** in my current company.
     
-       I have hands-on experience in **financial systems**, **marketplaces**, **accounting software**, and **banking platforms**, including integrating with **bank APIs** and **payment gateways**.
+    I have hands-on experience in **financial systems**, **marketplaces**, **accounting software**, and **banking platforms**, including integrating with **bank APIs** and **payment gateways**.
     
-       Driven by curiosity and continuous learning, I’m highly motivated to deepen my expertise in **backend development**, **database design**, and **system architecture**.  
-       I thrive on solving complex problems, optimizing performance, and collaborating within team environments.  
-       I’m also interested in **data science**, **system design**, and leveraging **modern monitoring tools** to build scalable, reliable systems.
+    Driven by curiosity and continuous learning, I’m highly motivated to deepen my expertise in **backend development**, **database design**, and **system architecture**.  
+    I thrive on solving complex problems, optimizing performance, and collaborating within team environments.  
+    I’m also interested in **data science**, **system design**, and leveraging **modern monitoring tools** to build scalable, reliable systems.
     
-      ```json
-      {
-           "title": "Software Engineer",
-           "summary": "A passionate Software Engineer with a strong interest in .NET, C#, and modern backend technologies.",
-           "background": {
-           "initialExperience": "PHP, C#",
-           "transitionedTo": ".NET ecosystem",
-           "learningPath": ["self-taught", "professional (current company)"]
-           },
-           "experience": [
-           "financial systems",
-           "marketplaces",
-           "accounting software",
-           "banking platforms"
-           ],
-           "integrations": [
-           "bank APIs",
-           "payment gateways"
-           ],
-           "motivations": [
-           "curiosity",
-           "continuous learning"
-           ],
-           "interests": [
-           "backend development",
-           "database design",
-           "system architecture",
-           "data science",
-           "system design",
-           "modern monitoring tools"
-           ],
-           "strengths": [
-           "solving complex problems",
-           "performance optimization",
-           "team collaboration"
-           ]
-       }
-        ```
+   ```json
+   {
+        "title": "Software Engineer",
+        "summary": "A passionate Software Engineer with a strong interest in .NET, C#, and modern backend technologies.",
+        "background": {
+        "initialExperience": "PHP, C#",
+        "transitionedTo": ".NET ecosystem",
+        "learningPath": ["self-taught", "professional (current company)"]
+        },
+        "experience": [
+        "financial systems",
+        "marketplaces",
+        "accounting software",
+        "banking platforms"
+        ],
+        "integrations": [
+        "bank APIs",
+        "payment gateways"
+        ],
+        "motivations": [
+        "curiosity",
+        "continuous learning"
+        ],
+        "interests": [
+        "backend development",
+        "database design",
+        "system architecture",
+        "data science",
+        "system design",
+        "modern monitoring tools"
+        ],
+        "strengths": [
+        "solving complex problems",
+        "performance optimization",
+        "team collaboration"
+        ]
+    }
+     ```
