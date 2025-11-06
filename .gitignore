@@ -47,6 +47,7 @@ packages/
 
 ### Entity Framework ###
 Migrations/
+logs/
 
 ### SQLite database ###
 *.db

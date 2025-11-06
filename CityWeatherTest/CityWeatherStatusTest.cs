@@ -1,9 +1,9 @@
+using CityWeathers.Core.Application;
 using CityWeathers.Core.Dtos.WeatherService;
 using CityWeathers.Core.Exceptions;
-using CityWeathers.Core.Services.Application;
-using CityWeathers.Core.Services.Weather;
 using CityWeathers.Data.Entity;
 using CityWeathers.Data.Repositories;
+using CityWeathers.Services.Weather;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -15,22 +15,21 @@ public class CityWeatherStatusTest
       [Fact]
     public async Task GetCityWeather_Returns_Combined_Weather_And_Pollution_Data()
     {
-        // Arrange
         var city = new City 
         { 
             Id = 1, 
             Name = "Tehran", 
             Latitude = 35.6892m, 
             Longitude = 51.3890m, 
-            Code = "THR" 
+            Code = "tehran" 
         };
 
         var mockCityRepo = new Mock<ICityRepository>();
-        mockCityRepo.Setup(r => r.GetCityByNameAsync("Tehran")).ReturnsAsync(city);
+        mockCityRepo.Setup(r => r.GetCityByNameAsync("Tehran", CancellationToken.None)).ReturnsAsync(city);
         var mockCityData = new Mock<ICityDataRepository>();
 
         var mockWeatherService = new Mock<IWeatherService>();
-        mockWeatherService.Setup(s => s.GetCityWeatherAsync(city.Id, city.Latitude, city.Longitude))
+        mockWeatherService.Setup(s => s.GetCityWeatherAsync(city.Id, city.Latitude, city.Longitude, CancellationToken.None))
             .ReturnsAsync(new CityWeatherDto
             {
                 TemperatureCelsius = 25.5,
@@ -40,7 +39,7 @@ public class CityWeatherStatusTest
                 Longitude = city.Longitude
             });
 
-        mockWeatherService.Setup(s => s.GetCityPollutantAsync(city.Id, city.Latitude, city.Longitude))
+        mockWeatherService.Setup(s => s.GetCityPollutantAsync(city.Id, city.Latitude, city.Longitude, CancellationToken.None))
             .ReturnsAsync(new CityPollutantDto
             {
                 AirQualityIndex = 85.0,
@@ -51,7 +50,7 @@ public class CityWeatherStatusTest
         var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
 
         // Act
-        var result = await service.GetCityWeather("Tehran");
+        var result = await service.GetCityWeather("Tehran",CancellationToken.None);
 
         // Assert
         result.Should().NotBeNull();
@@ -62,50 +61,50 @@ public class CityWeatherStatusTest
         result.Latitude.Should().Be(city.Latitude);
         result.Longitude.Should().Be(city.Longitude);
     }
-
+    
     [Fact]
     public async Task GetCityWeather_Throws_NotFoundException_When_City_Does_Not_Exist()
     {
         // Arrange
         var mockCityRepo = new Mock<ICityRepository>();
-        mockCityRepo.Setup(r => r.GetCityByNameAsync("UnknownCity")).ReturnsAsync((City?)null);
+        mockCityRepo.Setup(r => r.GetCityByNameAsync("UnknownCity", CancellationToken.None)).ReturnsAsync((City?)null);
         var mockCityData = new Mock<ICityDataRepository>();
-
+    
         var mockWeatherService = new Mock<IWeatherService>();
         var mockLogger = new Mock<ILogger<WeatherAppService>>();
         var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
-
+    
         // Act
-        var act = async () => await service.GetCityWeather("UnknownCity");
-
+        var act = async () => await service.GetCityWeather("UnknownCity", CancellationToken.None);
+    
         // Assert
         await act.Should().ThrowAsync<NotFoundException>()
             .WithMessage("city UnknownCity not found");
     }
-
+    
     [Fact]
     public async Task GetCityWeather_Throws_ThirdPartyServiceNotAvailable_When_Both_Services_Fail()
     {
         // Arrange
         var city = new City { Id = 1, Name = "Tehran", Latitude = 35.6892m, Longitude = 51.3890m, Code = "THR" };
-
+    
         var mockCityRepo = new Mock<ICityRepository>();
-        mockCityRepo.Setup(r => r.GetCityByNameAsync("Tehran")).ReturnsAsync(city);
-
+        mockCityRepo.Setup(r => r.GetCityByNameAsync("Tehran", CancellationToken.None)).ReturnsAsync(city);
+    
         var mockWeatherService = new Mock<IWeatherService>();
-        mockWeatherService.Setup(s => s.GetCityWeatherAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
+        mockWeatherService.Setup(s => s.GetCityWeatherAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<decimal>(), CancellationToken.None))
             .ThrowsAsync(new Exception("Weather service failed"));
-        mockWeatherService.Setup(s => s.GetCityPollutantAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
+        mockWeatherService.Setup(s => s.GetCityPollutantAsync(It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<decimal>(), CancellationToken.None))
             .ThrowsAsync(new Exception("Pollution service failed"));
-
+    
         var mockCityData = new Mock<ICityDataRepository>();
         
         var mockLogger = new Mock<ILogger<WeatherAppService>>();
         var service = new WeatherAppService(mockWeatherService.Object, mockCityRepo.Object, mockLogger.Object, mockCityData.Object);
-
+    
         // Act
-        var act = async () => await service.GetCityWeather("Tehran");
-
+        var act = async () => await service.GetCityWeather("Tehran", CancellationToken.None);
+    
         // Assert
         await act.Should().ThrowAsync<ThirdPartyServiceNotAvailable>()
             .WithMessage("Third party service not available");
