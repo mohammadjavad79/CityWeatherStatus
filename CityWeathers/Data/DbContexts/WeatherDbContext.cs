@@ -6,6 +6,5 @@ namespace CityWeathers.Data.DbContexts;
 public class WeatherDbContext(DbContextOptions<WeatherDbContext> options) : DbContext(options)
 {
     public DbSet<City> Cities { get; set; } = null!;
-    public DbSet<WeatherApiRequest> WeatherApiRequests { get; set; } = null!;
     public DbSet<CityData> CityData { get; set; } = null!;
 }

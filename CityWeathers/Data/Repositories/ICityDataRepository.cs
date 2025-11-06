@@ -4,5 +4,5 @@ namespace CityWeathers.Data.Repositories;
 
 public interface ICityDataRepository
 {
-    public Task<CityData> StoreAsync(CityData cityData);
+    public Task AddAsync(CityData cityData);
 }

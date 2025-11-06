@@ -1,9 +1,10 @@
+using CityWeathers.Core.Application;
 using CityWeathers.Core.Middlewares;
-using CityWeathers.Core.Services.Application;
 using CityWeathers.Core.Services.Weather;
 using CityWeathers.Data.DbContexts;
 using CityWeathers.Data.Repositories;
 using CityWeathers.Data.Seeder;
+using CityWeathers.Services.Weather;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -41,7 +42,6 @@ builder.Services.AddEndpointsApiExplorer()
 builder.Services.AddHttpClient<IWeatherService, OpenWeatherService>();
 builder.Services.AddScoped<IWeatherAppService, WeatherAppService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
-builder.Services.AddScoped<IWeatherApiRequestRepository, WeatherApiRequestRepository>();
 builder.Services.AddScoped<ICityDataRepository, CityDataRepository>();
 builder.Services.AddDbContext<WeatherDbContext>(options =>
 {

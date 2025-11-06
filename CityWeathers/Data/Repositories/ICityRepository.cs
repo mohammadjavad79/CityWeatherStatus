@@ -4,5 +4,5 @@ namespace CityWeathers.Data.Repositories;
 
 public interface ICityRepository
 {
-    public Task<City?> GetCityByNameAsync(string cityName);
+    public Task<City?> GetCityByNameAsync(string cityName, CancellationToken cancellationToken);
 }

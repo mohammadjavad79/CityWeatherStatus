@@ -13,8 +13,10 @@ public class CityRepository : ICityRepository
         _context = weatherDbContext;
     }
     
-    public async Task<City?> GetCityByNameAsync(string cityName)
+    public async Task<City?> GetCityByNameAsync(string cityName, CancellationToken cancellationToken)
     {
-        return await _context.Cities.Where(city => city.Name == cityName).FirstOrDefaultAsync();
+        return await _context.Cities
+            .Where(city => city.Name.ToLower() == cityName.ToLower())
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }

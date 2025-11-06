@@ -12,12 +12,10 @@ public class CityDataRepository : ICityDataRepository
         _context = weatherDbContext;
     }
     
-    public async Task<CityData> StoreAsync(CityData cityData)
+    public async Task AddAsync(CityData cityData)
     {
-        _context.CityData.Add(cityData);
+        await _context.CityData.AddAsync(cityData);
 
         await _context.SaveChangesAsync();
-
-        return cityData;
     }
 }

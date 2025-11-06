@@ -1,11 +1,11 @@
 using CityWeathers.Core.Dtos.ApiResponse;
 using CityWeathers.Core.Dtos.WeatherService;
 using CityWeathers.Core.Exceptions;
-using CityWeathers.Core.Services.Weather;
 using CityWeathers.Data.Entity;
 using CityWeathers.Data.Repositories;
+using CityWeathers.Services.Weather;
 
-namespace CityWeathers.Core.Services.Application;
+namespace CityWeathers.Core.Application;
 
 public class WeatherAppService : IWeatherAppService
 {
@@ -27,21 +27,21 @@ public class WeatherAppService : IWeatherAppService
         _cityDataRepository = cityDataRepository;
     }
     
-    public async Task<GetCityWeatherStatusResponseDto> GetCityWeather(string cityName)
+    public async Task<GetCityWeatherStatusResponseDto> GetCityWeather(string cityName, CancellationToken cancellationToken)
     {
-        var city = await GetCityOrThrowAsync(cityName);
+        var city = await GetCityOrThrowAsync(cityName, cancellationToken);
         
-        var (cityWeather, weatherFailed) = await TryGetCityWeatherAsync(city);
-        var (cityPollutant, pollutionFailed) = await TryGetCityPollutantAsync(city);
+        Result<CityWeatherDto> cityWeather = await TryGetCityWeatherAsync(city, cancellationToken);
+        Result<CityPollutantDto> cityPollutant = await TryGetCityPollutantAsync(city, cancellationToken);
         
-        await StoreCityDataAsync(cityWeather, cityPollutant, city);
+        await StoreCityDataAsync(cityWeather.Value, cityPollutant.Value, city);
         
-        if (weatherFailed && pollutionFailed)
+        if (! cityWeather.IsSuccess && ! cityPollutant.IsSuccess)
         {
             throw new ThirdPartyServiceNotAvailable("Third party service not available");
         }
         
-        return MapToResponse(cityWeather, cityPollutant);
+        return MapToResponse(cityWeather.Value, cityPollutant.Value);
     }
 
     private async Task StoreCityDataAsync(CityWeatherDto? cityWeatherDto, CityPollutantDto? cityPollutantDto, City city)
@@ -56,12 +56,12 @@ public class WeatherAppService : IWeatherAppService
             CityId = city.Id
         };
 
-        await _cityDataRepository.StoreAsync(cityData);
+        await _cityDataRepository.AddAsync(cityData);
     }
     
-    private async Task<City> GetCityOrThrowAsync(string cityName)
+    private async Task<City> GetCityOrThrowAsync(string cityName, CancellationToken cancellationToken)
     {
-        var city = await _cityRepository.GetCityByNameAsync(cityName);
+        var city = await _cityRepository.GetCityByNameAsync(cityName, cancellationToken);
 
         if (city == null)
         {
@@ -73,29 +73,31 @@ public class WeatherAppService : IWeatherAppService
         return city;
     }
 
-    private async Task<(CityWeatherDto? weather, bool failed)> TryGetCityWeatherAsync(City city)
+    private async Task<Result<CityWeatherDto>> TryGetCityWeatherAsync(City city, CancellationToken cancellationToken)
     {
         try
         {
-            var cityWeather = await _weatherService.GetCityWeatherAsync(city.Id, city.Latitude, city.Longitude);
-            return (cityWeather, false);
+            var cityWeather = await _weatherService.GetCityWeatherAsync(city.Id, city.Latitude, city.Longitude, cancellationToken);
+
+            return Result<CityWeatherDto>.Success(cityWeather);
         }
         catch (Exception exception)
         {
-            return (null, true);
+            return Result<CityWeatherDto>.Failure("City Weather Has Exception or Error");
         }
     }
 
-    private async Task<(CityPollutantDto? weather, bool faild)> TryGetCityPollutantAsync(City city)
+    private async Task<Result<CityPollutantDto>> TryGetCityPollutantAsync(City city, CancellationToken cancellationToken)
     {
         try
         {
-            var cityPollutant = await _weatherService.GetCityPollutantAsync(city.Id, city.Latitude, city.Longitude);
-            return (cityPollutant, false);
+            var cityPollutant = await _weatherService.GetCityPollutantAsync(city.Id, city.Latitude, city.Longitude, cancellationToken);
+
+            return Result<CityPollutantDto>.Success(cityPollutant);
         }
         catch (Exception exception)
         {
-            return (null, true);
+            return Result<CityPollutantDto>.Failure("City Pollutant Has Exception or Error");
         }
     }
     

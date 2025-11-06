@@ -24,7 +24,5 @@ public class City
     [MaxLength(20)]
     public string Code { get; set; }
     
-    public ICollection<WeatherApiRequest> WeatherApiRequests {get; set;} = new List<WeatherApiRequest>();
-    
     public ICollection<CityData> CityData { get; set; } = new List<CityData>();
 }

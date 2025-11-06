@@ -1,6 +1,6 @@
+using CityWeathers.Core.Application;
 using CityWeathers.Core.Dtos.ApiRequest;
 using CityWeathers.Core.Dtos.ApiResponse;
-using CityWeathers.Core.Services.Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityWeathers.Core.Controllers;
@@ -17,9 +17,9 @@ public class WeatherController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<GetCityWeatherStatusResponseDto>> Get([FromQuery] GetCityWeatherRequestDto getCityWeatherRequest)
+    public async Task<ActionResult<GetCityWeatherStatusResponseDto>> Get([FromQuery] GetCityWeatherRequestDto getCityWeatherRequest, CancellationToken cancellationToken)
     {
-        var result = await _weatherAppService.GetCityWeather(getCityWeatherRequest.Name);
+        var result = await _weatherAppService.GetCityWeather(getCityWeatherRequest.Name, cancellationToken);
         
         return Ok(result);
     }

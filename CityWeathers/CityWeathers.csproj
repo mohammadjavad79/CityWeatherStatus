@@ -23,6 +23,7 @@
       <Folder Include="Core\" />
       <Folder Include="Data\" />
       <Folder Include="Helpers\" />
+      <Folder Include="Presentation\" />
     </ItemGroup>
 
 </Project>
