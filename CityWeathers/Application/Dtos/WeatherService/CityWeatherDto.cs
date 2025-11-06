@@ -1,4 +1,4 @@
-namespace CityWeathers.Core.Dtos.WeatherService;
+namespace CityWeathers.Application.Dtos.WeatherService;
 
 public class CityWeatherDto
 {

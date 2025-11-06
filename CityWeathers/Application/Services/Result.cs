@@ -1,4 +1,4 @@
-namespace CityWeathers.Core.Application;
+namespace CityWeathers.Application.Services;
 
 public class Result<TResult> where TResult : class
 {

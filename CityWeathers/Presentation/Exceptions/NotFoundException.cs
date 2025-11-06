@@ -1,4 +1,4 @@
-namespace CityWeathers.Core.Exceptions;
+namespace CityWeathers.Presentation.Exceptions;
 
 public class NotFoundException : Exception
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CityWeathers.Core.Dtos.ApiRequest;
+namespace CityWeathers.Application.Dtos.ApiRequest;
 
 public class GetCityWeatherRequestDto
 {

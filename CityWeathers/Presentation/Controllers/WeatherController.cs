@@ -1,9 +1,9 @@
-using CityWeathers.Core.Application;
-using CityWeathers.Core.Dtos.ApiRequest;
-using CityWeathers.Core.Dtos.ApiResponse;
+using CityWeathers.Application.Dtos.ApiRequest;
+using CityWeathers.Application.Dtos.ApiResponse;
+using CityWeathers.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CityWeathers.Core.Controllers;
+namespace CityWeathers.Presentation.Controllers;
 
 [ApiController]
 [Route("[controller]")]

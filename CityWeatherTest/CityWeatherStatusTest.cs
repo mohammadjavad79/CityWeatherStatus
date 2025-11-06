@@ -1,9 +1,9 @@
-using CityWeathers.Core.Application;
-using CityWeathers.Core.Dtos.WeatherService;
-using CityWeathers.Core.Exceptions;
+using CityWeathers.Application.Dtos.WeatherService;
+using CityWeathers.Application.Services;
 using CityWeathers.Data.Entity;
 using CityWeathers.Data.Repositories;
-using CityWeathers.Services.Weather;
+using CityWeathers.Infrustructure.Weather;
+using CityWeathers.Presentation.Exceptions;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;

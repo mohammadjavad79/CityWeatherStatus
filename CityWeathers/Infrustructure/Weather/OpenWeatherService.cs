@@ -1,11 +1,10 @@
 using System.Globalization;
 using System.Text.Json;
-using CityWeathers.Core.Dtos.WeatherService;
-using CityWeathers.Core.Exceptions;
-using CityWeathers.Services.Weather;
+using CityWeathers.Application.Dtos.WeatherService;
+using CityWeathers.Presentation.Exceptions;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace CityWeathers.Core.Services.Weather;
+namespace CityWeathers.Infrustructure.Weather;
 
 public class OpenWeatherService : IWeatherService
 {

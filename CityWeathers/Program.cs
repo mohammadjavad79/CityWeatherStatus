@@ -1,10 +1,9 @@
-using CityWeathers.Core.Application;
-using CityWeathers.Core.Middlewares;
-using CityWeathers.Core.Services.Weather;
+using CityWeathers.Application.Services;
 using CityWeathers.Data.DbContexts;
 using CityWeathers.Data.Repositories;
 using CityWeathers.Data.Seeder;
-using CityWeathers.Services.Weather;
+using CityWeathers.Infrustructure.Weather;
+using CityWeathers.Presentation.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;

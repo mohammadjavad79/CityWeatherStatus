@@ -1,6 +1,6 @@
-using CityWeathers.Core.Dtos.ApiResponse;
+using CityWeathers.Application.Dtos.ApiResponse;
 
-namespace CityWeathers.Core.Application;
+namespace CityWeathers.Application.Services;
 
 public interface IWeatherAppService
 {

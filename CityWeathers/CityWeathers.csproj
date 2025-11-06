@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Core\" />
+      <Folder Include="Application\" />
       <Folder Include="Data\" />
       <Folder Include="Helpers\" />
       <Folder Include="Presentation\" />

@@ -1,6 +1,6 @@
-using CityWeathers.Core.Exceptions;
+using CityWeathers.Presentation.Exceptions;
 
-namespace CityWeathers.Core.Middlewares;
+namespace CityWeathers.Presentation.Middlewares;
 
 public class GlobalExceptionHandlerMiddleware
 {

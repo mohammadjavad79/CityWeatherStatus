@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace CityWeathers.Core.Dtos.WeatherService;
+namespace CityWeathers.Application.Dtos.WeatherService;
 
 public class OpenWeatherGetCityPollutantResponseDto
 {

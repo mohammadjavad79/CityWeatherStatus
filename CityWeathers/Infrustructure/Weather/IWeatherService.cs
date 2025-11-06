@@ -1,6 +1,6 @@
-using CityWeathers.Core.Dtos.WeatherService;
+using CityWeathers.Application.Dtos.WeatherService;
 
-namespace CityWeathers.Services.Weather;
+namespace CityWeathers.Infrustructure.Weather;
 
 public interface IWeatherService
 {

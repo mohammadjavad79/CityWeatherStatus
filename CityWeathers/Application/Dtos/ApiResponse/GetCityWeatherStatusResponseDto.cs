@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CityWeathers.Helpers.Converters;
 
-namespace CityWeathers.Core.Dtos.ApiResponse;
+namespace CityWeathers.Application.Dtos.ApiResponse;
 
 public class GetCityWeatherStatusResponseDto
 {
