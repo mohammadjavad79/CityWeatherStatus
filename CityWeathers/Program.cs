@@ -38,7 +38,11 @@ builder.Services.AddEndpointsApiExplorer()
     });
 
 #region Add Services
-builder.Services.AddHttpClient<IWeatherService, OpenWeatherService>();
+builder.Services.AddHttpClient<IWeatherService, OpenWeatherService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["Services:Weather:OpenWeather:BaseDomainUrl"] ?? string.Empty);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
 builder.Services.AddScoped<IWeatherAppService, WeatherAppService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityDataRepository, CityDataRepository>();

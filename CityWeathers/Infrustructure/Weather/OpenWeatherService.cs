@@ -68,8 +68,7 @@ public class OpenWeatherService : IWeatherService
     private string Createurl(string? url, decimal latitude, decimal longitude)
     {
         var apiKey = _configuration["Services:Weather:OpenWeather:ApiKey"];
-        var baseUrl = _configuration["Services:Weather:OpenWeather:BaseDomainUrl"] + url;
-
+        
         var queryParam = new Dictionary<string, string?>()
         {
             ["lat"] = latitude.ToString(CultureInfo.InvariantCulture),
@@ -77,7 +76,7 @@ public class OpenWeatherService : IWeatherService
             ["appid"] = apiKey!
         };
         
-        return QueryHelpers.AddQueryString(baseUrl, queryParam);
+        return QueryHelpers.AddQueryString(url ?? String.Empty, queryParam);
     }
     
     private void ThrowExceptionOnFailedResponse(HttpResponseMessage response, string message)
